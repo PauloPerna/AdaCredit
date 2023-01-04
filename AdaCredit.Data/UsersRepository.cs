@@ -14,6 +14,22 @@ namespace AdaCredit.Data
             //TODO: lógica de adicionar user
             // testar se já existe
             // testar CPF
+            // testar name
+            return false;
+        }
+        public static User Get(int cpf)
+        {
+            //TODO: retornar usuário por cpf
+            return null;
+        }
+        public static User Get(string name)
+        {
+            //TODO: retornar usuário por name
+            return null;
+        }
+        public static bool EditPassword(User user)
+        {
+            //TODO: editar senha do usuário
             return false;
         }
     }
