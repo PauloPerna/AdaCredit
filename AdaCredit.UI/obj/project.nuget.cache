@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "4Ze2ehTCF+io3B6n5+3tD+Mh3AXUe1RtQ/tVgA5BkX9WccdKs48NUJb5C/8qLUi20pZuaS45eWGy8Y8H/KOduQ==",
+  "success": true,
+  "projectFilePath": "/home/perna/codecs/AdaCredit/AdaCredit.UI/AdaCredit.UI.csproj",
+  "expectedPackageFiles": [
+    "/home/perna/.nuget/packages/nstack.core/1.0.3/nstack.core.1.0.3.nupkg.sha512",
+    "/home/perna/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
+    "/home/perna/.nuget/packages/terminal.gui/1.8.2/terminal.gui.1.8.2.nupkg.sha512"
+  ],
+  "logs": []
+}

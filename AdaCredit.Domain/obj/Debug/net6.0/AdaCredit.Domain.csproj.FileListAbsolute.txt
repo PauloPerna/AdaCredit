@@ -1,0 +1,12 @@
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/bin/Debug/net6.0/AdaCredit.Domain.deps.json
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/bin/Debug/net6.0/AdaCredit.Domain.dll
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/bin/Debug/net6.0/ref/AdaCredit.Domain.dll
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/bin/Debug/net6.0/AdaCredit.Domain.pdb
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/obj/Debug/net6.0/AdaCredit.Domain.csproj.AssemblyReference.cache
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/obj/Debug/net6.0/AdaCredit.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/obj/Debug/net6.0/AdaCredit.Domain.AssemblyInfoInputs.cache
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/obj/Debug/net6.0/AdaCredit.Domain.AssemblyInfo.cs
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/obj/Debug/net6.0/AdaCredit.Domain.csproj.CoreCompileInputs.cache
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/obj/Debug/net6.0/AdaCredit.Domain.dll
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/obj/Debug/net6.0/ref/AdaCredit.Domain.dll
+/home/perna/codecs/AdaCredit/AdaCredit.Domain/obj/Debug/net6.0/AdaCredit.Domain.pdb
