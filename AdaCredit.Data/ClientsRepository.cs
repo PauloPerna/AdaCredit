@@ -48,9 +48,23 @@ namespace AdaCredit.Data
             _clients.Add(client);
             return true;
         }
+        public static bool Update(Client client)
+        {
+            var index = GetIndex(client);
+            if(index == -1)
+            {
+                return false;
+            }
+            _clients[index] = client;
+            return true;
+        }
         public static Client Get(long cpf)
         {
             return _clients.FirstOrDefault(c => c.cpf == cpf, null);;
+        }
+        public static int GetIndex(Client client)
+        {
+            return _clients.FindIndex(c => c == client);;
         }
         public static bool Deactivate(Client client)
         {

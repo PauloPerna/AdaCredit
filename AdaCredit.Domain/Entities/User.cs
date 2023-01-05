@@ -12,7 +12,6 @@ namespace AdaCredit.Domain.Entities
         public long cpf { get; init; }
         public string name { get; set; }
         public string pass { get; private set; }
-        private string salt { get; set; }
         public bool active { get; private set; }
         public DateTime lastLogin { get; set; }
         public User(long cpf, string name, string pass, bool active, DateTime lastLogin)
@@ -29,17 +28,17 @@ namespace AdaCredit.Domain.Entities
             this.cpf = cpf;
             this.name = name;
             this.active = true;
-            this.salt = BCrypt.Net.BCrypt.GenerateSalt(12);
-            this.pass = BCrypt.Net.BCrypt.HashPassword(cleanPass, this.salt);
+            string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+            this.pass = BCrypt.Net.BCrypt.HashPassword(cleanPass, salt);
         }
-        public bool Login(string pass)
+        public bool Login(string cleanPass)
         {
-            return BCrypt.Net.BCrypt.Verify(pass, this.pass);
+            return BCrypt.Net.BCrypt.Verify(cleanPass, this.pass);
         }
         public bool RedefinePass(string cleanPass)
         {
-            this.salt = BCrypt.Net.BCrypt.GenerateSalt(12);
-            this.pass = BCrypt.Net.BCrypt.HashPassword(cleanPass, this.salt);
+            string salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+            this.pass = BCrypt.Net.BCrypt.HashPassword(cleanPass, salt);
             return true;
         }
         public bool Deactivate()

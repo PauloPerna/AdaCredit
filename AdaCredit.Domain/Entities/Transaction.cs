@@ -7,11 +7,15 @@ namespace AdaCredit.Domain.Entities
 {
     public class Transaction
     {
-        private int originBankCode { get; init; }
-        private int originAgencyCode { get; init; }
-        private int originAccountCode { get; init; }
-        private int destinationBankCode { get; init; }
-        private int destinationAgencyCode { get; init; }
-        private int destinationAccountCode { get; init; }
+        public int originBankCode { get; init; }
+        public int originAgencyCode { get; init; }
+        public int originAccountCode { get; init; }
+        public int destinationBankCode { get; init; }
+        public int destinationAgencyCode { get; init; }
+        public int destinationAccountCode { get; init; }
+        public string typeTransaction { get; init; }
+        public int Credit { get; init; }
+        public double value { get; init; }
+        public DateTime date { get; set; }
     }
 }

@@ -11,7 +11,11 @@ namespace AdaCredit.Domain.Entities
         // Although the cpf is just init, the name can change over the years (social name cases for example)
         public string name { get; set; }
         public List<Account> accounts { get; set; }
-        public bool active { get; set; }
+        private bool active { get; set; }
+        // Criar um DTO onde tudo é público
+        // então salvamos e lemos o DTO.
+        // clientDTO: tem todos os atributos públicos, n tem metodos
+
         public Client(long cpf, string name)
         {
             this.cpf = cpf;
@@ -19,11 +23,13 @@ namespace AdaCredit.Domain.Entities
             this.active = true;
             this.accounts = new List<Account>();
         }
-        public bool AddAccount(Account account){
+        public bool AddAccount(Account account)
+        {
             this.accounts.Add(account);
             return true;
         }
-        public bool Deactivate(){
+        public bool Deactivate()
+        {
             if(!this.active)
             {
                 return false;

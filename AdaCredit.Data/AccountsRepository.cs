@@ -57,5 +57,35 @@ namespace AdaCredit.Data
 
             return new Account(client, accountNumber);
         }
+        public static int GetIndexAccountNumber(int accountNumber)
+        {
+            return _accounts.FindIndex(a => a.accountNumber == accountNumber);
+        }
+        public static double GetBalanceByAccountCode(int accountNumber)
+        {
+            var index = GetIndexAccountNumber(accountNumber);
+            return _accounts[index].balance;
+        }
+        public static bool Credit(int accountNumber, double value)
+        {
+            var index = GetIndexAccountNumber(accountNumber);
+            return _accounts[index].Credit(value);
+        }
+        public static bool Debit(int accountNumber, double value)
+        {
+            var index = GetIndexAccountNumber(accountNumber);
+            return _accounts[index].Debit(value);
+        }
+        public static string DisplayString()
+        {
+            string message = "";
+            string tString;
+            foreach(Account t in _accounts)
+            {
+                tString = $"an: {t.accountNumber} balance: {t.balance}\n";
+                message = message + tString;
+            }
+            return message;
+        }
     }
 }
