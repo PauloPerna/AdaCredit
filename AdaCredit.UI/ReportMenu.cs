@@ -14,7 +14,7 @@ namespace AdaCredit.UI
             bool exit = false;
             int input;
             while(!exit){
-                Console.WriteLine("Selecione uma opção");
+                Console.WriteLine("Menu de Relatórios - Selecione uma opção");
                 Console.WriteLine("1 - Exibir todos os clientes ativos com seus respectivos saldos");
                 Console.WriteLine("2 - Exibir todos os clientes inativos");
                 Console.WriteLine("3 - Exibir todos os funcionários ativos e sua última data e hora de login");

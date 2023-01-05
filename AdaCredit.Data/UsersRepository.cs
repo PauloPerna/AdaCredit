@@ -43,38 +43,17 @@ namespace AdaCredit.Data
             }
             return true;
         }
-        public static bool Login(string login, string pass)
+        public static bool GetActiveState(int index)
         {
-            if(long.TryParse(login, out long cpf))
-            {
-                return Login(cpf, pass);
-            }
-            if(firstLogin == true)
-            {
-                return login == "admin" && pass == "pass";
-            }
-            return false;
+            return _users[index].active;
         }
-        public static bool Login(long cpf, string pass)
+        public static bool Login(int index, string pass)
         {
-            int index = GetIndex(cpf);
-            var cpfExists = index != -1;
-            if(!cpfExists)
-            {
-                return false;
-            }
-            var userActive = _users[index].active;
-            if(!userActive)
-            {
-                return false;
-            }
-            var loginSuccess = _users[index].Login(pass);
-            if(!loginSuccess)
-            {
-                return false;
-            }
-            loggedUserIndex = index;
-            _users[loggedUserIndex].lastLogin = DateTime.Now;
+            return _users[index].Login(pass);
+        }
+        public static bool UpdateLastLoginTime(int index)
+        {
+            _users[index].lastLogin = DateTime.Now;
             return true;
         }
         public static bool Add(User user)

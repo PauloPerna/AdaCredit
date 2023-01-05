@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AdaCredit.Domain.Entities;
+using AdaCredit.UseCases;
 using AdaCredit.Data;
 
 namespace AdaCredit.UI
@@ -15,7 +12,7 @@ namespace AdaCredit.UI
             bool exit = false;
             int input;
             while(!exit){
-                Console.WriteLine("Selecione uma opção");
+                Console.WriteLine("Menu de Clientes - Selecione uma opção");
                 Console.WriteLine("1 - Cadastrar novo cliente");
                 Console.WriteLine("2 - Consultar os dados de um Cliente");
                 Console.WriteLine("3 - Alterar o Cadastro de um Cliente");
@@ -60,8 +57,9 @@ namespace AdaCredit.UI
             }
             Console.WriteLine("Digite o nome do cliente");
             string name = Console.ReadLine();
-            Client client = new Client(cpf, name);
-            bool success = ClientsRepository.Add(client);
+            Tuple<Client, bool> result = AddNewClient.Execute(cpf, name);
+            Client client = result.Item1;
+            bool success = result.Item2;
             if(!success)
             {
                 Console.WriteLine("O cliente não pode ser criado. Já existe alguém cadastrado com esse CPF?");
@@ -97,7 +95,7 @@ namespace AdaCredit.UI
                 Console.WriteLine("Por favor, digite apenas números");
             }
             Client client = ClientsRepository.Get(cpf);
-            Console.WriteLine(client);
+            ReportClient.Execute(client);
         }
         public static void EditClient()
         {
@@ -106,6 +104,11 @@ namespace AdaCredit.UI
             while(!long.TryParse(Console.ReadLine(), out cpf))
             {
                 Console.WriteLine("Por favor, digite apenas números");
+            }
+            if(!ClientsRepository.Exists(cpf))
+            {
+                Console.WriteLine("Cliente não encontrado. Saindo da função.");
+                return;
             }
             Client client = ClientsRepository.Get(cpf);
             bool exit = false;
@@ -153,13 +156,18 @@ namespace AdaCredit.UI
             {
                 Console.WriteLine("Por favor, digite apenas números");
             }
+            if(!ClientsRepository.Exists(cpf))
+            {
+                Console.WriteLine("Cliente não encontrado. Saindo da função.");
+                return;
+            }
             ClientsRepository.Deactivate(cpf);
             Console.WriteLine("Client desativado com sucesso!");
         }
         public static void NewAccount(Client client)
         {
-            Account account = AccountsRepository.GenerateNewUnique(client);
-            client.AddAccount(account);
+            Tuple<bool,Account> result = GenerateNewAccount.Execute(client);
+            Account account = result.Item2; 
             Console.WriteLine($"Conta de número {account.accountNumber} atribuída ao cliente {client.name}");
         }
         public static void NewAccount()
@@ -169,6 +177,11 @@ namespace AdaCredit.UI
             while(!long.TryParse(Console.ReadLine(), out cpf))
             {
                 Console.WriteLine("Por favor, digite apenas números");
+            }
+            if(!ClientsRepository.Exists(cpf))
+            {
+                Console.WriteLine("Cliente não encontrado. Saindo da função.");
+                return;
             }
             Client client = ClientsRepository.Get(cpf);
             NewAccount(client);

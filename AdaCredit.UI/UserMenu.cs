@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AdaCredit.Data;
 using AdaCredit.Domain.Entities;
+using AdaCredit.UseCases;
 
 namespace AdaCredit.UI
 {
@@ -14,7 +15,7 @@ namespace AdaCredit.UI
             bool exit = false;
             int input;
             while(!exit){
-                Console.WriteLine("Selecione uma opção");
+                Console.WriteLine("Menu de Funcionários - Selecione uma opção");
                 Console.WriteLine("1 - Cadastrar novo funcionário");
                 Console.WriteLine("2 - Alterar senha de um funcionário");
                 Console.WriteLine("3 - Desativar Cadastro de funcionário");
@@ -66,7 +67,7 @@ namespace AdaCredit.UI
             }
             Console.WriteLine("Digite a senha antiga:");
             string pass = Console.ReadLine();
-            if(!UsersRepository.Login(cpf,pass))
+            if(!Login.Execute(cpf,pass))
             {
                 Console.WriteLine("Senha incorreta. Retornando ao menu de Funcionários");
                 return;

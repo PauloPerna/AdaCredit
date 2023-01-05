@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AdaCredit.UseCases;
 using AdaCredit.Data;
 
@@ -14,7 +10,7 @@ namespace AdaCredit.UI
             bool exit = false;
             int input;
             while(!exit){
-                Console.WriteLine("Selecione uma opção");
+                Console.WriteLine("Menu de Transações - Selecione uma opção");
                 Console.WriteLine("1 - Processar transações");
                 Console.WriteLine("2 - Retornar ao Menu Principal");
                 int.TryParse(Console.ReadLine(), out input);

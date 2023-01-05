@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BetterConsoleTables;
 
 namespace AdaCredit.Domain.Entities
 {
@@ -13,10 +9,6 @@ namespace AdaCredit.Domain.Entities
         public string name { get; set; }
         public List<Account> accounts { get; set; }
         public bool active { get; private set; }
-        // Criar um DTO onde tudo é público
-        // então salvamos e lemos o DTO.
-        // clientDTO: tem todos os atributos públicos, n tem metodos
-
         public Client(long cpf, string name)
         {
             this.cpf = cpf;
@@ -53,26 +45,6 @@ namespace AdaCredit.Domain.Entities
             }
             this.active = true;
             return true;
-        }
-        public override string ToString()
-        {
-            string message = $"Cliente: {this.name}\n";
-            message = message + $"CPF: {this.cpf}\n";
-            if(this.active)
-            {
-                message = message + $"Situação: ativo\n";
-            } else {
-                message = message + $"Situação: inativo\n\n";
-            }
-            message = message + "---- Contas Vinculadas ao Cliente ----\n";
-            Table tableAccounts = new Table("Conta", "Agência", "Banco","Saldo");
-            foreach(Account account in this.accounts)
-            {
-                tableAccounts.AddRow(account.accountNumber,account.agencyNumber,account.bankCode,account.balance);
-            }
-            tableAccounts.Config = TableConfiguration.Unicode();
-            message = message + tableAccounts.ToString();
-            return message;
         }
     }
 }

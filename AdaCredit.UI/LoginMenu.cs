@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AdaCredit.Data;
+using AdaCredit.UseCases;
 using AdaCredit.Domain.Entities;
 
 namespace AdaCredit.UI
@@ -16,11 +17,12 @@ namespace AdaCredit.UI
 			bool loginSuccess;
 			string pass;
 			do{
+				System.Console.WriteLine("--- ÁREA DE LOGIN ---");
 				System.Console.WriteLine("Digite seu login (cpf)");
 				login = Console.ReadLine();
 				System.Console.WriteLine("Digite sua senha");
 				pass = Console.ReadLine();
-				loginSuccess = UsersRepository.Login(login, pass);
+				loginSuccess = Login.Execute(login, pass);
 				if(!loginSuccess)
 				{
 					System.Console.WriteLine("Usuário ou senha errado. Por favor, tente novamente.");

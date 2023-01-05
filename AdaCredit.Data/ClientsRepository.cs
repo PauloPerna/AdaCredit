@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Globalization;
 using BetterConsoleTables;
 using CsvHelper;
@@ -74,13 +70,17 @@ namespace AdaCredit.Data
         {
             return _clients.FirstOrDefault(c => c.cpf == cpf, null);;
         }
+        public static bool Exists(long cpf)
+        {
+            return _clients.FindIndex(c => c.cpf == cpf) != -1;
+        }
         public static int GetIndex(Client client)
         {
-            return _clients.FindIndex(c => c == client);;
+            return _clients.FindIndex(c => c == client);
         }
         public static int GetIndex(long cpf)
         {
-            return _clients.FindIndex(c => c.cpf == cpf);;
+            return _clients.FindIndex(c => c.cpf == cpf);
         }
         public static bool Deactivate(long cpf)
         {
