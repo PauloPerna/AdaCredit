@@ -43,6 +43,10 @@ namespace AdaCredit.Data
             }
             return true;
         }
+        public static bool Exists(long cpf)
+        {
+            return GetIndex(cpf) != -1;
+        }
         public static bool GetActiveState(int index)
         {
             return _users[index].active;

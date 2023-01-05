@@ -53,9 +53,27 @@ namespace AdaCredit.UI
                 Console.WriteLine("Por favor, digite apenas números");
             }
             Console.WriteLine("Digite a senha do funcionário");
-            string pass = Console.ReadLine();
+            string pass = string.Empty;
+            ConsoleKey key;
+            do
+            {
+                var keyInfo = Console.ReadKey(intercept: true);
+                key = keyInfo.Key;
+
+                if (key == ConsoleKey.Backspace && pass.Length > 0)
+                {
+                    Console.Write("\b \b");
+                    pass = pass[0..^1];
+                }
+                else if (!char.IsControl(keyInfo.KeyChar))
+                {
+                    Console.Write("*");
+                    pass += keyInfo.KeyChar;
+                }
+            } while (key != ConsoleKey.Enter);
             var newUser = new User(cpf, name, pass);
             UsersRepository.Add(newUser);
+            Console.WriteLine("Novo usuário registrado!\n");
         }
         public static void ChangePassword()
         {
@@ -65,18 +83,55 @@ namespace AdaCredit.UI
             {
                 Console.WriteLine("Por favor, digite apenas números");
             }
-            Console.WriteLine("Digite a senha antiga:");
-            string pass = Console.ReadLine();
-            if(!Login.Execute(cpf,pass))
-            {
-                Console.WriteLine("Senha incorreta. Retornando ao menu de Funcionários");
+            if(!UsersRepository.Exists(cpf)){
+                Console.WriteLine("Funcionário não encontrado.");
                 return;
             }
-            Console.WriteLine("Digite a nova senha:");
-            string newPass = Console.ReadLine();
+            Console.WriteLine("Digite a senha antiga:");
+			string pass = string.Empty;
+            ConsoleKey key;
+            do
+            {
+                var keyInfo = Console.ReadKey(intercept: true);
+                key = keyInfo.Key;
+
+                if (key == ConsoleKey.Backspace && pass.Length > 0)
+                {
+                    Console.Write("\b \b");
+                    pass = pass[0..^1];
+                }
+                else if (!char.IsControl(keyInfo.KeyChar))
+                {
+                    Console.Write("*");
+                    pass += keyInfo.KeyChar;
+                }
+            } while (key != ConsoleKey.Enter);
+            if(!Login.Execute(cpf,pass))
+            {
+                Console.WriteLine("\nSenha incorreta. Retornando ao menu de Funcionários");
+                return;
+            }
+            Console.WriteLine("\nDigite a nova senha:");
+            string newPass = string.Empty;
+            do
+            {
+                var keyInfo = Console.ReadKey(intercept: true);
+                key = keyInfo.Key;
+
+                if (key == ConsoleKey.Backspace && pass.Length > 0)
+                {
+                    Console.Write("\b \b");
+                    pass = pass[0..^1];
+                }
+                else if (!char.IsControl(keyInfo.KeyChar))
+                {
+                    Console.Write("*");
+                    pass += keyInfo.KeyChar;
+                }
+            } while (key != ConsoleKey.Enter);
             if(UsersRepository.RedefinePass(cpf,newPass))
             {
-                Console.WriteLine("Senha redefinida com sucesso!");
+                Console.WriteLine("\nSenha redefinida com sucesso!");
             }
         }
         public static void DeactivateUser()
@@ -86,6 +141,10 @@ namespace AdaCredit.UI
             while(!long.TryParse(Console.ReadLine(), out cpf))
             {
                 Console.WriteLine("Por favor, digite apenas números");
+            }
+            if(!UsersRepository.Exists(cpf)){
+                Console.WriteLine("Funcionário não encontrado.");
+                return;
             }
             if(!UsersRepository.Deactivate(cpf))
             {

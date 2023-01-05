@@ -97,7 +97,7 @@ namespace AdaCredit.Data
         public static Table ShowActiveClientWithBalance()
         {
             Table activeClients = new Table("Cliente","CPF","Ativo","Conta","Agência","Banco","Saldo");
-            foreach(Client client in _clients)
+            foreach(Client client in _clients.Where(c => c.active).ToList())
             {
                 foreach(Account account in client.accounts)
                 {

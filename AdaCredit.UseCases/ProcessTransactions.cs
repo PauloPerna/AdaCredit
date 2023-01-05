@@ -48,8 +48,13 @@ namespace AdaCredit.UseCases
                     "TED" => 5,
                     "DOC" => 1 + Math.Max(transaction.value*0.01,5),
                     "TEF" => 0,
-                    _ => 0
+                    _ => -1
                 };
+                if(tarifa == -1)
+                {
+                    lastErrorDescription = "Tipo de Transação desconhecido";
+                    return false;
+                }
             }
             double valueDebit = transaction.value + tarifa;
             if(!VerifyTransactionAccounts(transaction))
@@ -84,6 +89,7 @@ namespace AdaCredit.UseCases
         }
         public static bool VerifyTransactionAccounts(Transaction transaction)
         {
+            // Conta da AdaCredit que não está no repositório
             if(transaction.originBankCode == 777 &&
                 AccountsRepository.GetIndexAccountNumber(transaction.originAccountCode) == -1)
             {

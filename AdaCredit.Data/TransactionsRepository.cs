@@ -82,10 +82,10 @@ namespace AdaCredit.Data
         }
         public static Table ShowErrorTransactions()
         {
-            Table errorTransactions = new Table("Data","Conta de Origem","Agência de Origem","Banco de Origem","Conta de Destino","Agência de Destino","Banco de Destino","Débito/Crédito (0/1)","Valor","Descrição do Erro");
+            Table errorTransactions = new Table("Data","Conta de Origem","Agência de Origem","Banco de Origem","Conta de Destino","Agência de Destino","Banco de Destino","Débito/Crédito (0/1)","Valor","Tipo","Descrição do Erro");
             foreach(Transaction transaction in _failedTransactions)
             {
-                errorTransactions.AddRow(transaction.date,transaction.originAccountCode,transaction.originAgencyCode,transaction.originBankCode,transaction.destinationAccountCode,transaction.destinationAgencyCode,transaction.destinationBankCode,transaction.Credit,transaction.value.ToString("C"),transaction.errorDescription);
+                errorTransactions.AddRow(transaction.date,transaction.originAccountCode,transaction.originAgencyCode,transaction.originBankCode,transaction.destinationAccountCode,transaction.destinationAgencyCode,transaction.destinationBankCode,transaction.Credit,transaction.value.ToString("C"),transaction.typeTransaction,transaction.errorDescription);
             }
             errorTransactions.Config = TableConfiguration.Unicode();
             return errorTransactions;
