@@ -9,10 +9,8 @@
 /home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/fr-FR/Terminal.Gui.resources.dll
 /home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/ja-JP/Terminal.Gui.resources.dll
 /home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/pt-PT/Terminal.Gui.resources.dll
-/home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/AdaCredit.App.dll
 /home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/AdaCredit.Data.dll
 /home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/AdaCredit.Domain.dll
-/home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/AdaCredit.App.pdb
 /home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/AdaCredit.Data.pdb
 /home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/AdaCredit.Domain.pdb
 /home/perna/codecs/AdaCredit/AdaCredit.UI/obj/Debug/net6.0/AdaCredit.UI.csproj.AssemblyReference.cache
@@ -25,3 +23,8 @@
 /home/perna/codecs/AdaCredit/AdaCredit.UI/obj/Debug/net6.0/ref/AdaCredit.UI.dll
 /home/perna/codecs/AdaCredit/AdaCredit.UI/obj/Debug/net6.0/AdaCredit.UI.pdb
 /home/perna/codecs/AdaCredit/AdaCredit.UI/obj/Debug/net6.0/AdaCredit.UI.genruntimeconfig.cache
+/home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/Bogus.dll
+/home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/AdaCredit.UseCases.dll
+/home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/AdaCredit.UseCases.pdb
+/home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/BCrypt.Net.dll
+/home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/CsvHelper.dll

@@ -2,42 +2,60 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
+using CsvHelper;
 using AdaCredit.Domain.Entities;
 
 namespace AdaCredit.Data
 {
     public static class ClientsRepository
     {
-        private static List<Client> _client { get; set; }
-        
+        private static List<Client> _clients = new List<Client>();
+        static ClientsRepository()
+        {
+            string path = Environment.GetFolderPath (Environment.SpecialFolder.Desktop);
+            string fileName = "clients.csv";
+            string fileFullName = Path.Combine(path,fileName);
+            if(!File.Exists(fileFullName))
+            {
+                return;
+            }
+            using (var reader = new StreamReader(fileFullName))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                _clients = csv.GetRecords<Client>().ToList();
+            }
+            //TODO: linkar accounts repository
+        }
+        public static bool WriteClientsToFile()
+        {
+            string path = Environment.GetFolderPath (Environment.SpecialFolder.Desktop);
+            string fileName = "clients.csv";
+            string fileFullName = Path.Combine(path,fileName);
+            using (var writer = new StreamWriter(fileFullName))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                csv.WriteRecords(_clients);
+            }
+            return true;
+        }
         public static bool Add(Client client)
         {
-            //TODO: lógica de adicionar cliente
-            // testar se já existe
-            // testar CPF
-            return false;
+            if(_clients.Any(c => c.cpf == client.cpf))
+            {
+                return false;
+            }
+            _clients.Add(client);
+            return true;
         }
-
-        public static Client Get(int cpf)
+        public static Client Get(long cpf)
         {
-            //TODO: retornar um cliente da lista
-            return null;
-        }
-
-        public static Client Get(string name)
-        {
-            //TODO: retornar um cliente da lista
-            return null;
-        }
-        public static bool Edit(Client client)
-        {
-            //TODO: modificar um cliente da lista
-            return false;
+            return _clients.FirstOrDefault(c => c.cpf == cpf, null);;
         }
         public static bool Deactivate(Client client)
         {
-            //TODO: desativar um cliente da lista
-            return false;
+            var index = _clients.FindIndex(c => c == client);
+            return _clients[index].Deactivate();
         }
     }
 }

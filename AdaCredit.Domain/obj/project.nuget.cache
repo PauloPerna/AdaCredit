@@ -1,8 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "iAx+/G+PCNaJOes6CGWfkeUGtWElTOAgj3UsA93m/vvmoz/na+rr9zkK8mUrHWZ+TbYK49fD4nqMXccqb2ZgBQ==",
+  "dgSpecHash": "nKaG9iTufBRGC88tDGoZ+Pi7zR7W7DlUzNJiBulr4A5vuUcZaXw6CeRgC8hAxGcDoX680kWsPbU5E3rPhRrgIA==",
   "success": true,
   "projectFilePath": "/home/perna/codecs/AdaCredit/AdaCredit.Domain/AdaCredit.Domain.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "expectedPackageFiles": [
+    "/home/perna/.nuget/packages/bcrypt.net/0.1.0/bcrypt.net.0.1.0.nupkg.sha512",
+    "/home/perna/.nuget/packages/bogus/34.0.2/bogus.34.0.2.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'BCrypt.Net 0.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "BCrypt.Net",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

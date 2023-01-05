@@ -4,6 +4,10 @@
     <ProjectReference Include="..\AdaCredit.Domain\AdaCredit.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CSVHelper" Version="30.0.1" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

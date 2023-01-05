@@ -2,6 +2,33 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "BCrypt.Net/0.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/BCrypt.Net.dll": {}
+        },
+        "runtime": {
+          "lib/net35/BCrypt.Net.dll": {}
+        }
+      },
+      "Bogus/34.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Bogus.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Bogus.dll": {}
+        }
+      },
+      "CsvHelper/30.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/CsvHelper.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/CsvHelper.dll": {}
+        }
+      },
       "NStack.Core/1.0.3": {
         "type": "package",
         "dependencies": {
@@ -46,24 +73,12 @@
           }
         }
       },
-      "AdaCredit.App/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "AdaCredit.Domain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/AdaCredit.App.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/AdaCredit.App.dll": {}
-        }
-      },
       "AdaCredit.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "AdaCredit.Domain": "1.0.0"
+          "AdaCredit.Domain": "1.0.0",
+          "CSVHelper": "30.0.1"
         },
         "compile": {
           "bin/placeholder/AdaCredit.Data.dll": {}
@@ -75,16 +90,90 @@
       "AdaCredit.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BCrypt.Net": "0.1.0",
+          "Bogus": "34.0.2"
+        },
         "compile": {
           "bin/placeholder/AdaCredit.Domain.dll": {}
         },
         "runtime": {
           "bin/placeholder/AdaCredit.Domain.dll": {}
         }
+      },
+      "AdaCredit.UseCases/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AdaCredit.Data": "1.0.0",
+          "AdaCredit.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/AdaCredit.UseCases.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AdaCredit.UseCases.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "BCrypt.Net/0.1.0": {
+      "sha512": "sST2w361Dxt9GGMfpOTiK50wXGV64Ybb1hiX3xjEWnhVYZNF43NuySGwADJa7X1R+bA53NsFR+tuDxcYiJeIOA==",
+      "type": "package",
+      "path": "bcrypt.net/0.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bcrypt.net.0.1.0.nupkg.sha512",
+        "bcrypt.net.nuspec",
+        "lib/net35/BCrypt.Net.XML",
+        "lib/net35/BCrypt.Net.dll"
+      ]
+    },
+    "Bogus/34.0.2": {
+      "sha512": "2KQAuMn3fLAQ2r6jeiffZnpv0bi3GCW3iRB2v1KeHIEBu8MNTh9dBlLTZwGvM0pr+9doKkU8L5JgCURmTmT88A==",
+      "type": "package",
+      "path": "bogus/34.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bogus.34.0.2.nupkg.sha512",
+        "bogus.nuspec",
+        "lib/net40/Bogus.dll",
+        "lib/net40/Bogus.xml",
+        "lib/net6.0/Bogus.dll",
+        "lib/net6.0/Bogus.xml",
+        "lib/netstandard1.3/Bogus.dll",
+        "lib/netstandard1.3/Bogus.xml",
+        "lib/netstandard2.0/Bogus.dll",
+        "lib/netstandard2.0/Bogus.xml"
+      ]
+    },
+    "CsvHelper/30.0.1": {
+      "sha512": "rcZtgbWR+As4G3Vpgx0AMNmShGuQLFjkHAPIIflzrfkJCx8/AOd4m96ZRmiU1Wi39qS5UVjV0P8qdgqOo5Cwyg==",
+      "type": "package",
+      "path": "csvhelper/30.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "csvhelper.30.0.1.nupkg.sha512",
+        "csvhelper.nuspec",
+        "lib/net45/CsvHelper.dll",
+        "lib/net45/CsvHelper.xml",
+        "lib/net47/CsvHelper.dll",
+        "lib/net47/CsvHelper.xml",
+        "lib/net5.0/CsvHelper.dll",
+        "lib/net5.0/CsvHelper.xml",
+        "lib/net6.0/CsvHelper.dll",
+        "lib/net6.0/CsvHelper.xml",
+        "lib/netstandard2.0/CsvHelper.dll",
+        "lib/netstandard2.0/CsvHelper.xml",
+        "lib/netstandard2.1/CsvHelper.dll",
+        "lib/netstandard2.1/CsvHelper.xml"
+      ]
+    },
     "NStack.Core/1.0.3": {
       "sha512": "CvduI58J+1dXFbPfPrBBhhfCexllRfZCTNRU4Ml+ZgYjJBPsh+8FlfKhj7XRDy2Pqn0pybofJIPu46gW30rqdA==",
       "type": "package",
@@ -171,11 +260,6 @@
         "terminal.gui.nuspec"
       ]
     },
-    "AdaCredit.App/1.0.0": {
-      "type": "project",
-      "path": "../AdaCredit.App/AdaCredit.App.csproj",
-      "msbuildProject": "../AdaCredit.App/AdaCredit.App.csproj"
-    },
     "AdaCredit.Data/1.0.0": {
       "type": "project",
       "path": "../AdaCredit.Data/AdaCredit.Data.csproj",
@@ -185,12 +269,18 @@
       "type": "project",
       "path": "../AdaCredit.Domain/AdaCredit.Domain.csproj",
       "msbuildProject": "../AdaCredit.Domain/AdaCredit.Domain.csproj"
+    },
+    "AdaCredit.UseCases/1.0.0": {
+      "type": "project",
+      "path": "../AdaCredit.UseCases/AdaCredit.UseCases.csproj",
+      "msbuildProject": "../AdaCredit.UseCases/AdaCredit.UseCases.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "AdaCredit.App >= 1.0.0",
       "AdaCredit.Data >= 1.0.0",
+      "AdaCredit.Domain >= 1.0.0",
+      "AdaCredit.UseCases >= 1.0.0",
       "Terminal.Gui >= 1.8.2"
     ]
   },
@@ -219,11 +309,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/home/perna/codecs/AdaCredit/AdaCredit.App/AdaCredit.App.csproj": {
-              "projectPath": "/home/perna/codecs/AdaCredit/AdaCredit.App/AdaCredit.App.csproj"
-            },
             "/home/perna/codecs/AdaCredit/AdaCredit.Data/AdaCredit.Data.csproj": {
               "projectPath": "/home/perna/codecs/AdaCredit/AdaCredit.Data/AdaCredit.Data.csproj"
+            },
+            "/home/perna/codecs/AdaCredit/AdaCredit.Domain/AdaCredit.Domain.csproj": {
+              "projectPath": "/home/perna/codecs/AdaCredit/AdaCredit.Domain/AdaCredit.Domain.csproj"
+            },
+            "/home/perna/codecs/AdaCredit/AdaCredit.UseCases/AdaCredit.UseCases.csproj": {
+              "projectPath": "/home/perna/codecs/AdaCredit/AdaCredit.UseCases/AdaCredit.UseCases.csproj"
             }
           }
         }
@@ -261,5 +354,17 @@
         "runtimeIdentifierGraphPath": "/usr/lib/dotnet/dotnet6-6.0.110/sdk/6.0.110/RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'BCrypt.Net 0.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "BCrypt.Net",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
