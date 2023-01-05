@@ -7,25 +7,26 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using AdaCredit.Domain.Entities;
 using System.Text.RegularExpressions;
+using BetterConsoleTables;
 
 namespace AdaCredit.Data
 {
-    public class TransactionsRepository
+    public static class TransactionsRepository
     {
-        private List<Transaction> _trasactions = new List<Transaction>();
-        private List<Transaction> _failedTransactions = new List<Transaction>();
-        private List<Transaction> _completedTransactions = new List<Transaction>();
-        private string fileFullName;
-        private bool fileReaded;
-        public TransactionsRepository(string fileName)
+        private static List<Transaction> _trasactions = new List<Transaction>();
+        private static List<Transaction> _failedTransactions = new List<Transaction>();
+        private static List<Transaction> _completedTransactions = new List<Transaction>();
+        private static string fileFullName;
+        private static bool fileReaded;
+        public static void Load(string fileName)
         {
             string path = Environment.GetFolderPath (Environment.SpecialFolder.Desktop);
             string folder = "Transactions";
             string fileFullName = Path.Combine(path,folder,fileName);
-            this.fileFullName = fileFullName;
+            fileFullName = fileFullName;
             if(!File.Exists(fileFullName))
             {
-                this.fileReaded = false;
+                fileReaded = false;
             }
             var config = new CsvConfiguration(CultureInfo.InvariantCulture) 
             {
@@ -37,7 +38,7 @@ namespace AdaCredit.Data
                 csv.Context.RegisterClassMap<TransactionMap>();
                 _trasactions = csv.GetRecords<Transaction>().ToList();
             }
-            this.fileReaded = true;
+            fileReaded = true;
             string dateInFileName = Regex.Match(fileName,"[0-9]{8}.csv$").ToString(); 
             int year, month, day;
             DateTime dateFile = DateTime.Today;
@@ -52,17 +53,17 @@ namespace AdaCredit.Data
                 t.date = dateFile;
             }
         }
-        public bool WriteTransactionsToFile()
+        public static bool WriteTransactionsToFile()
         {
             // Failed Transactions
-            string failedFileName = Regex.Replace(this.fileFullName,"\\.csv$","-failed.csv");
+            string failedFileName = Regex.Replace(fileFullName,"\\.csv$","-failed.csv");
             using (var writer = new StreamWriter(failedFileName))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
                 csv.WriteRecords(_failedTransactions);
             }
             // Completed Transactions
-            string completedFileName = Regex.Replace(this.fileFullName,"\\.csv$","-completed.csv");
+            string completedFileName = Regex.Replace(fileFullName,"\\.csv$","-completed.csv");
             using (var writer = new StreamWriter(completedFileName))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
@@ -70,17 +71,28 @@ namespace AdaCredit.Data
             }
             return true;
         }
-        public List<Transaction> GetAllTransactions()
+        public static List<Transaction> GetAllTransactions()
         {
             return _trasactions;
         }
-        public void AddFailedTransaction(Transaction transaction)
+        public static void AddFailedTransaction(Transaction transaction, string errorDescription)
         {
+            transaction.errorDescription = errorDescription;
             _failedTransactions.Add(transaction);
         }
-        public void AddCompletedTransaction(Transaction transaction)
+        public static void AddCompletedTransaction(Transaction transaction)
         {
             _completedTransactions.Add(transaction);
+        }
+        public static Table ShowErrorTransactions()
+        {
+            Table errorTransactions = new Table("Data","Conta de Origem","Agência de Origem","Banco de Origem","Conta de Destino","Agência de Destino","Banco de Destino","Débito/Crédito (0/1)","Valor","Descrição do Erro");
+            foreach(Transaction transaction in _failedTransactions)
+            {
+                errorTransactions.AddRow(transaction.date,transaction.originAccountCode,transaction.originAgencyCode,transaction.originBankCode,transaction.destinationAccountCode,transaction.destinationAgencyCode,transaction.destinationBankCode,transaction.Credit,transaction.value.ToString("C"),transaction.errorDescription);
+            }
+            errorTransactions.Config = TableConfiguration.Unicode();
+            return errorTransactions;
         }
     }
 }

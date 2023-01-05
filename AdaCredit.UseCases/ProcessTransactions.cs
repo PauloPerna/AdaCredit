@@ -9,16 +9,17 @@ namespace AdaCredit.UseCases
 {
     public static class ProcessTransactions
     {
-        public static bool ProcessAllTransactions(TransactionsRepository transactionsRepository)
+        public static string lastErrorDescription;
+        public static bool ProcessAllTransactions()
         {
-            List<Transaction> transactions = transactionsRepository.GetAllTransactions();
+            List<Transaction> transactions = TransactionsRepository.GetAllTransactions();
             foreach(Transaction t in transactions)
             {
                 if(!ProcessTransaction(t))
                 {
-                    transactionsRepository.AddFailedTransaction(t);
+                    TransactionsRepository.AddFailedTransaction(t,lastErrorDescription);
                 } else {
-                    transactionsRepository.AddCompletedTransaction(t);
+                    TransactionsRepository.AddCompletedTransaction(t);
                 }
             }
             return true;
@@ -28,6 +29,7 @@ namespace AdaCredit.UseCases
             // Processamos apenas transacoes com o banco AdaCredit
             if(transaction.originBankCode != 777 && transaction.destinationBankCode != 777)
             {
+                lastErrorDescription = "Transação não inclui AdaCredit";
                 return false;
             }
             // TEF apenas entre clientes do banco AdaCredit
@@ -35,6 +37,7 @@ namespace AdaCredit.UseCases
                 (transaction.destinationBankCode != 777 ||
                 transaction.originBankCode != 777))
             {
+                lastErrorDescription = "TEF com banco externo";
                 return false;
             }
             // Transacoes antes do dia 01-12-2022 sao isentas
@@ -51,10 +54,12 @@ namespace AdaCredit.UseCases
             double valueDebit = transaction.value + tarifa;
             if(!VerifyTransactionAccounts(transaction))
             {
+                lastErrorDescription = "Código de conta não encontrada";
                 return false;
             }
             if(!VerifyTransactionValue(valueDebit, transaction))
             {
+                lastErrorDescription = "Saldo insuficiente";
                 return false;
             }
             bool success_fromAda = true;

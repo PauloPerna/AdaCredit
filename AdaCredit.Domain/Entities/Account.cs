@@ -12,7 +12,7 @@ namespace AdaCredit.Domain.Entities
         public int agencyNumber { get; init; }
         public int bankCode = 777;
         public double balance { get; set; }
-        private Client client {get; set; }
+        public Client client {get; init; }
         private static Random rnd = new Random();
         public Account(Client client, int accountNumber){
             this.accountNumber = accountNumber;

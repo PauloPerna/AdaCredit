@@ -14,7 +14,7 @@ namespace AdaCredit.Data
         private static Random rnd = new Random();
         static AccountsRepository()
         {
-            string path = Environment.GetFolderPath (Environment.SpecialFolder.Desktop);
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = "accounts.csv";
             string fileFullName = Path.Combine(path,fileName);
             if(!File.Exists(fileFullName))
@@ -29,7 +29,7 @@ namespace AdaCredit.Data
         }
         public static bool WriteAccountsToFile()
         {
-            string path = Environment.GetFolderPath (Environment.SpecialFolder.Desktop);
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string fileName = "accounts.csv";
             string fileFullName = Path.Combine(path,fileName);
             using (var writer = new StreamWriter(fileFullName))
@@ -46,16 +46,22 @@ namespace AdaCredit.Data
                 return false;
             }
             _accounts.Add(account);
+            WriteAccountsToFile();
             return true;
         }
-        public static Account GetNewUnique(Client client)
+        public static Account GenerateNewUnique(Client client)
         {
             int accountNumber;
             do{
                 accountNumber = rnd.Next(1,999999);
             }while(_accounts.Any(c => c.accountNumber == accountNumber));
-
-            return new Account(client, accountNumber);
+            Account account = new Account(client, accountNumber);
+            Add(account);
+            return account;
+        }
+        public static List<Account> GetAccounts(Client client)
+        {
+            return _accounts.Where(a => a.client.cpf == client.cpf).ToList();
         }
         public static int GetIndexAccountNumber(int accountNumber)
         {
@@ -69,12 +75,14 @@ namespace AdaCredit.Data
         public static bool Credit(int accountNumber, double value)
         {
             var index = GetIndexAccountNumber(accountNumber);
-            return _accounts[index].Credit(value);
+            return _accounts[index].Credit(value) &&
+                    WriteAccountsToFile();
         }
         public static bool Debit(int accountNumber, double value)
         {
             var index = GetIndexAccountNumber(accountNumber);
-            return _accounts[index].Debit(value);
+            return _accounts[index].Debit(value) &&
+                    WriteAccountsToFile();
         }
         public static string DisplayString()
         {
@@ -82,7 +90,7 @@ namespace AdaCredit.Data
             string tString;
             foreach(Account t in _accounts)
             {
-                tString = $"an: {t.accountNumber} balance: {t.balance}\n";
+                tString = $"Número: {t.accountNumber} Saldo: {t.balance}\n";
                 message = message + tString;
             }
             return message;

@@ -18,7 +18,7 @@ namespace AdaCredit.UI
                 Console.WriteLine("1 - Cadastrar novo funcionário");
                 Console.WriteLine("2 - Alterar senha de um funcionário");
                 Console.WriteLine("3 - Desativar Cadastro de funcionário");
-                Console.WriteLine("4 - Retornar");
+                Console.WriteLine("4 - Retornar ao Menu Principal");
                 int.TryParse(Console.ReadLine(), out input);
                 switch(input)
                 {

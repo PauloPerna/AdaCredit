@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "tgcT8fajh06iSO1Na/fZ/Ngte0FMwUe1Jxu6+DSwOnuRs0mjxvmJL5JHPvCYMj/ePqt20V47HHCJkJGHzQH36w==",
+  "dgSpecHash": "FY/NhagRPkVvwxmOLTuiAveeXhTtCjXUZ/HRwrZYuef2NjYOMWkXGC9exLpUzrdA+4F4sqIL1toi9nx43eMVcA==",
   "success": true,
   "projectFilePath": "/home/perna/codecs/AdaCredit/AdaCredit.UI/AdaCredit.UI.csproj",
   "expectedPackageFiles": [
     "/home/perna/.nuget/packages/bcrypt.net/0.1.0/bcrypt.net.0.1.0.nupkg.sha512",
+    "/home/perna/.nuget/packages/betterconsoletables/1.1.3/betterconsoletables.1.1.3.nupkg.sha512",
     "/home/perna/.nuget/packages/bogus/34.0.2/bogus.34.0.2.nupkg.sha512",
     "/home/perna/.nuget/packages/csvhelper/30.0.1/csvhelper.30.0.1.nupkg.sha512",
     "/home/perna/.nuget/packages/nstack.core/1.0.3/nstack.core.1.0.3.nupkg.sha512",

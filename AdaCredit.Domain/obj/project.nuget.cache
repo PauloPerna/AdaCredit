@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "nKaG9iTufBRGC88tDGoZ+Pi7zR7W7DlUzNJiBulr4A5vuUcZaXw6CeRgC8hAxGcDoX680kWsPbU5E3rPhRrgIA==",
+  "dgSpecHash": "SGEYjnXJUwxczA4x426M8baR+ngfLW9bz6Ts3OzIm9rdB0y8aeEbxXOFYiVuTs9/Dr3KjOA5rLWSs+d03URVMg==",
   "success": true,
   "projectFilePath": "/home/perna/codecs/AdaCredit/AdaCredit.Domain/AdaCredit.Domain.csproj",
   "expectedPackageFiles": [
     "/home/perna/.nuget/packages/bcrypt.net/0.1.0/bcrypt.net.0.1.0.nupkg.sha512",
+    "/home/perna/.nuget/packages/betterconsoletables/1.1.3/betterconsoletables.1.1.3.nupkg.sha512",
     "/home/perna/.nuget/packages/bogus/34.0.2/bogus.34.0.2.nupkg.sha512"
   ],
   "logs": [

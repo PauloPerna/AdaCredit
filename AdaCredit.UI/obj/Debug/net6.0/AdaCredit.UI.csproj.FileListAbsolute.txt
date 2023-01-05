@@ -28,3 +28,4 @@
 /home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/AdaCredit.UseCases.pdb
 /home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/BCrypt.Net.dll
 /home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/CsvHelper.dll
+/home/perna/codecs/AdaCredit/AdaCredit.UI/bin/Debug/net6.0/BetterConsoleTables.dll

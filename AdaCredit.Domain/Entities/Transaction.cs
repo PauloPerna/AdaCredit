@@ -17,5 +17,6 @@ namespace AdaCredit.Domain.Entities
         public int Credit { get; init; }
         public double value { get; init; }
         public DateTime date { get; set; }
+        public string errorDescription { get; set; }
     }
 }

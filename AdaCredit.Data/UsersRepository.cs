@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Globalization;
 using CsvHelper;
+using BetterConsoleTables;
 using AdaCredit.Domain.Entities;
 
 namespace AdaCredit.Data
@@ -12,20 +13,17 @@ namespace AdaCredit.Data
     {
         private static List<User> _users = new List<User>();
         public static int loggedUserIndex;
-        public static bool firstLogin;
+        public static bool firstLogin { get; private set; }
         static UsersRepository()
         {
-            //TODO: leitura arquivo de usuários
             string path = Environment.GetFolderPath (Environment.SpecialFolder.Desktop);
             string fileName = "users.csv";
             string fileFullName = Path.Combine(path,fileName);
             if(!File.Exists(fileFullName))
             {
-                // Se o arquivo não existe, sinalizamos como primeiro login
                 firstLogin = true;
                 return;
             }
-            // se o arquivo existe, então carregamos a lista de objetos
             firstLogin = false;
             using (var reader = new StreamReader(fileFullName))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
@@ -45,12 +43,32 @@ namespace AdaCredit.Data
             }
             return true;
         }
+        public static bool Login(string login, string pass)
+        {
+            if(long.TryParse(login, out long cpf))
+            {
+                return Login(cpf, pass);
+            }
+            if(firstLogin == true)
+            {
+                return login == "admin" && pass == "pass";
+            }
+            return false;
+        }
         public static bool Login(long cpf, string pass)
         {
             int index = GetIndex(cpf);
-            var loginSuccess = index != -1 &&
-                             _users[index].active == true && 
-                             _users[index].Login(pass);
+            var cpfExists = index != -1;
+            if(!cpfExists)
+            {
+                return false;
+            }
+            var userActive = _users[index].active;
+            if(!userActive)
+            {
+                return false;
+            }
+            var loginSuccess = _users[index].Login(pass);
             if(!loginSuccess)
             {
                 return false;
@@ -67,11 +85,12 @@ namespace AdaCredit.Data
                 return false;
             }
             _users.Add(user);
+            UsersRepository.WriteUsersToFile();
             return true;
         }
         public static int GetIndex(long cpf)
         {
-            // Return user by cpf
+            // Return user index by cpf
             return _users.FindIndex(c => c.cpf == cpf);
         }
         public static User Get(long cpf)
@@ -87,12 +106,31 @@ namespace AdaCredit.Data
         public static bool RedefinePass(long cpf, string pass)
         {
             var index = GetIndex(cpf);
-            return _users[index].RedefinePass(pass);
+            bool success = _users[index].RedefinePass(pass) &&
+                            UsersRepository.WriteUsersToFile();
+            return success;
         }
         public static bool Deactivate(long cpf)
         {
             var index = GetIndex(cpf);
-            return _users[index].Deactivate();
+            if(_users.Count(c => c.active) == 1)
+            {
+                Console.WriteLine("Único funcionário ativo");
+                return false;
+            }
+            bool success = _users[index].Deactivate() &&
+                            UsersRepository.WriteUsersToFile();
+            return success;
+        }
+        public static Table ShowActiveUsers()
+        {
+            Table activeUsers = new Table("Funcionário","CPF","Último login");
+            foreach(User user in _users.Where(c => c.active))
+            {
+                activeUsers.AddRow(user.name,user.cpf,user.lastLogin);
+            }
+            activeUsers.Config = TableConfiguration.Unicode();
+            return activeUsers;
         }
     }
 }
