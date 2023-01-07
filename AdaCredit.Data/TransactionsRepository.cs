@@ -18,7 +18,8 @@ namespace AdaCredit.Data
         {
             string path = Environment.GetFolderPath (Environment.SpecialFolder.Desktop);
             string folder = "Transactions";
-            string fileFullName = Path.Combine(path,folder,fileName);
+            string folder2 = "Pending";
+            string fileFullName = Path.Combine(path,folder,folder2,fileName);
             fileFullName = fileFullName;
             if(!File.Exists(fileFullName))
             {

@@ -67,18 +67,18 @@ namespace AdaCredit.Data
         {
             return _accounts.FindIndex(a => a.accountNumber == accountNumber);
         }
-        public static double GetBalanceByAccountCode(int accountNumber)
+        public static decimal GetBalanceByAccountCode(int accountNumber)
         {
             var index = GetIndexAccountNumber(accountNumber);
             return _accounts[index].balance;
         }
-        public static bool Credit(int accountNumber, double value)
+        public static bool Credit(int accountNumber, decimal value)
         {
             var index = GetIndexAccountNumber(accountNumber);
             return _accounts[index].Credit(value) &&
                     WriteAccountsToFile();
         }
-        public static bool Debit(int accountNumber, double value)
+        public static bool Debit(int accountNumber, decimal value)
         {
             var index = GetIndexAccountNumber(accountNumber);
             return _accounts[index].Debit(value) &&

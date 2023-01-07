@@ -41,12 +41,12 @@ namespace AdaCredit.UseCases
                 return false;
             }
             // Transacoes antes do dia 01-12-2022 sao isentas
-            double tarifa = 0;
+            decimal tarifa = 0;
             if(transaction.date >= new DateTime(2022,12,1))
             {
                 tarifa = transaction.typeTransaction switch{
                     "TED" => 5,
-                    "DOC" => 1 + Math.Max(transaction.value*0.01,5),
+                    "DOC" => 1 + Math.Min(transaction.value*0.01M,5),
                     "TEF" => 0,
                     _ => -1
                 };
@@ -56,7 +56,7 @@ namespace AdaCredit.UseCases
                     return false;
                 }
             }
-            double valueDebit = transaction.value + tarifa;
+            decimal valueDebit = transaction.value + tarifa;
             if(!VerifyTransactionAccounts(transaction))
             {
                 lastErrorDescription = "Código de conta não encontrada";
@@ -79,11 +79,11 @@ namespace AdaCredit.UseCases
             }
             return success_fromAda && success_toAda;
         }
-        public static bool ProcessTransactionFromAdaCredit(double value, int accountNumber)
+        public static bool ProcessTransactionFromAdaCredit(decimal value, int accountNumber)
         {
             return AccountsRepository.Debit(accountNumber, value);
         }
-        public static bool ProcessTransactionToAdaCredit(double value, int accountNumber)
+        public static bool ProcessTransactionToAdaCredit(decimal value, int accountNumber)
         {
             return AccountsRepository.Credit(accountNumber, value);
         }
@@ -102,7 +102,7 @@ namespace AdaCredit.UseCases
             }
             return true;
         }
-        public static bool VerifyTransactionValue(double valueDebit, Transaction transaction)
+        public static bool VerifyTransactionValue(decimal valueDebit, Transaction transaction)
         {
             if(transaction.Credit == 0 &&
                 transaction.originBankCode == 777)

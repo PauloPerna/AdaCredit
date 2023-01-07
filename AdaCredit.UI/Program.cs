@@ -11,6 +11,10 @@ namespace AdaCredit.UI
 		public static void Main(string[] args)
 		{
 			System.Console.WriteLine("Bem vindo à AdaCredit!");
+			if(UsersRepository.firstLogin == true)
+			{
+				CreateFiles.Execute();
+			}
 			LoginMenu.View();
 			Menu.View();
 		}

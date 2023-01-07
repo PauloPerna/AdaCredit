@@ -10,7 +10,7 @@ namespace AdaCredit.UseCases
         public static List<string> Execute()
         {
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string path = Path.Combine(desktop,"Transactions");
+            string path = Path.Combine(desktop,"Transactions","Pending");
             var directory = new DirectoryInfo(path);
             List<string> names =  directory.GetFiles()
                                             .ToList()

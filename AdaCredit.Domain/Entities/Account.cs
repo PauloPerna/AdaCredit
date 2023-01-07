@@ -11,7 +11,7 @@ namespace AdaCredit.Domain.Entities
         public int accountNumber { get; init; }
         public int agencyNumber { get; init; }
         public int bankCode = 777;
-        public double balance { get; set; }
+        public decimal balance { get; set; }
         public Client client {get; init; }
         private static Random rnd = new Random();
         public Account(Client client, int accountNumber){
@@ -20,7 +20,7 @@ namespace AdaCredit.Domain.Entities
             this.balance = 0;
             this.client = client;
         }
-        public bool Debit(double value)
+        public bool Debit(decimal value)
         {
             if(balance < value)
             {
@@ -29,7 +29,7 @@ namespace AdaCredit.Domain.Entities
             balance = balance - value;
             return true;
         }
-        public bool Credit(double value)
+        public bool Credit(decimal value)
         {
             balance = balance + value;
             return true;

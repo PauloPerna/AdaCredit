@@ -15,7 +15,7 @@ namespace AdaCredit.Domain.Entities
         public int destinationAccountCode { get; init; }
         public string typeTransaction { get; init; }
         public int Credit { get; init; }
-        public double value { get; init; }
+        public decimal value { get; init; }
         public DateTime date { get; set; }
         public string errorDescription { get; set; }
     }
